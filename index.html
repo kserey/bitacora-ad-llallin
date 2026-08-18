@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bitácora Ad Llallin | Inicio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  
+  <!-- Navbar inyectado -->
+  <div id="navbar-container"></div>
+
+  <header class="hero text-white py-5">
+    <div class="container">
+      <p class="eyebrow">Memoria · territorio · tejido</p>
+      <h1 class="display-4 fw-bold">Una bitácora que se entrelaza</h1>
+      <p class="lead">Registro personal de mi recorrido por la Escuela Ad Llallin.</p>
+      <a class="btn btn-terra btn-lg" href="#sesiones">Explorar sesiones</a>
+    </div>
+  </header>
+
+<main id="sesiones" class="container py-5">
+  <div class="d-flex justify-content-between align-items-end mb-4">
+    <div>
+      <p class="eyebrow mb-2">Índice</p>
+      <h2 class="mb-0">Sesiones de aprendizaje</h2>
+    </div>
+  </div>
+
+  <!-- Aquí se cargarán las tarjetas solas -->
+  <div class="row g-4" id="contenedor-tarjetas">
+    <div class="col-12 text-muted">Cargando sesiones...</div>
+  </div>
+</main>
+
+<!-- Estructura del modal flotante -->
+<div class="modal fade" id="sesionModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content border-0 shadow" id="modalContent">
+      <!-- El contenido del modal se inyectará aquí -->
+    </div>
+  </div>
+</div>
+
+  <!-- Footer inyectado -->
+  <div id="footer-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
