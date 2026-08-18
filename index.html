@@ -13,26 +13,64 @@
   <!-- Navbar inyectado -->
   <div id="navbar-container"></div>
 
-  <header class="hero text-white py-5">
+  <header class="page-header py-5 px-4 px-md-5 mt-5 pt-5">
     <div class="container">
-      <p class="eyebrow">Memoria · territorio · tejido</p>
+      <p class="eyebrow">Memoria · Territorio · Textil</p>
       <h1 class="display-4 fw-bold">Una bitácora que se entrelaza</h1>
-      <p class="lead">Registro personal de mi recorrido por la Escuela Ad Llallin.</p>
+      <p class="lead">Registro personal de mi recorrido por la Escuela Ad Llallin 2026.</p>
       <a class="btn btn-terra btn-lg" href="#sesiones">Explorar sesiones</a>
     </div>
   </header>
 
 <main id="sesiones" class="container py-5">
-  <div class="d-flex justify-content-between align-items-end mb-4">
-    <div>
-      <p class="eyebrow mb-2">Índice</p>
-      <h2 class="mb-0">Sesiones de aprendizaje</h2>
+
+  <!-- SECCIÓN SOBRE MÍ -->
+  <section id="sobre-mi" class="py-5 my-4 bg-white border-top border-bottom">
+    <div class="container py-3">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="p-4 p-md-5 bg-light rounded-3 shadow-sm border">
+            <p class="eyebrow mb-1 text-uppercase text-secondary small fw-bold">Memoria, Territorio y Oficio</p>
+            <h2 class="h3 mb-3">Sobre esta bitácora</h2>
+            <p class="text-muted">
+              Este espacio digital recopila mi recorrido, aprendizajes y reflexiones en torno al oficio textil, la memoria y el territorio a través de mi paso por la Escuela de Arte Textil Mapuche <em><strong>Ad Llallin</strong></em>. Es un registro personal de experimentación con fibras, tintes naturales e historia que entrelaza la teoría con la práctica cotidiana.
+            </p>
+            <hr class="my-4 text-muted opacity-25">
+            <div class="row g-4 align-items-center">
+              <div class="col-md-9">
+                <h3 class="h5 mb-2 text-dark">¿Quién está detrás de este registro?</h3>
+                <p class="text-muted mb-2">
+                  <em>Mari mari kom pu che, inche Irina Serey pingen, fütra waria Santiago tuwün.</em>
+                </p>
+                <p class="text-muted small mb-2">
+                  Soy Ingeniera Industrial, Tech Lead y Consultora Senior en transformación digital y ciberseguridad. Apasionada por la tecnología, el desarrollo y los procesos de gestión.
+                </p>
+                <p class="text-muted small mb-0">
+                  En los oficios textiles, el tejido y la creación artesanal encuentro un espacio de resistencia cultural, precisión y anclaje con la tierra, donde habita mi propia búsqueda e identidad.
+                </p>
+              </div>
+              <div class="col-md-3 text-md-end">
+                <span class="badge bg-secondary text-light p-2">Tecnología & Oficio</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <!-- SECCIÓN SESIONES DE APRENDIZAJE -->
+  <section id="indice-sesiones" class="container my-5">
+    <p class="eyebrow text-uppercase small text-muted">Índice</p>
+    <h2 class="h3 mb-4">Sesiones de aprendizaje</h2>
+    <div id="contenedor-tarjetas" class="row g-4">
+      <!-- Aquí se cargan las tarjetas dinámicamente -->
+    </div>
+  </section>
 
   <!-- Aquí se cargarán las tarjetas solas -->
   <div class="row g-4" id="contenedor-tarjetas">
-    <div class="col-12 text-muted">Cargando sesiones...</div>
+
   </div>
 </main>
 

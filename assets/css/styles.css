@@ -18,6 +18,11 @@ body {
 /* Asegurar que la página ocupe al menos toda la altura de la ventana */
 html, body {
     height: 100%;
+    scroll-behavior: smooth;
+}
+
+section {
+    scroll-margin-top: 90px; 
 }
 
 /* El contenido principal empuja el footer hacia abajo */
