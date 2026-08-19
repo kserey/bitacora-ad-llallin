@@ -72,16 +72,18 @@ function cargarIndiceSesiones() {
             col.className = 'col-md-6 col-lg-4';
             
             col.innerHTML = `
-                <article class="session-card h-100 rounded-3 p-4">
-                    <span class="session-number">${s.numStr}</span>
-                    <p class="text-muted mt-3 mb-2">${s.fecha}</p>
-                    <h3 class="h4">${s.titulo}</h3>
-                    <p class="text-muted small">${s.desc}</p>
-                    <button class="btn btn-outline-secondary mt-3 btn-leer">
-                        Leer sesión
-                    </button>
-                </article>
-            `;
+                            <article class="session-card h-100 rounded-3 p-4 d-flex flex-column">
+                                <span class="session-number">${s.numStr}</span>
+                                <p class="text-muted mt-3 mb-2">${s.fecha}</p>
+                                <h3 class="h4">${s.titulo}</h3>
+                                <p class="text-muted small mb-4">${s.desc}</p>
+                                <div class="mt-auto">
+                                    <button class="btn btn-outline-secondary btn-leer w-100">
+                                        Leer sesión
+                                    </button>
+                                </div>
+                            </article>
+                        `;
 
             // Enlazar correctamente el evento click al botón de forma segura
             const btn = col.querySelector('.btn-leer');
