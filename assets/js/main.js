@@ -27,7 +27,8 @@ const listaSesiones = [
     "sesiones/sesion-03.html",
     "sesiones/sesion-04.html",
     "sesiones/sesion-05.html",
-    "sesiones/sesion-06-07.html"
+    "sesiones/sesion-06-07.html",
+    "sesiones/sesion-08.html"
 ];
 
 function cargarIndiceSesiones() {
