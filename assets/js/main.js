@@ -1,11 +1,49 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // 1. Cargar componentes (Navbar y Footer) desde assets/components/
+    // 1. Cargar componentes comunes (Navbar y Footer)
     loadComponent("navbar-container", "assets/components/navbar.html");
     loadComponent("footer-container", "assets/components/footer.html");
 
-    // 2. Generar las tarjetas del índice automáticamente
-    cargarIndiceSesiones();
+    // 2. Inicializar módulos según la página en la que estemos
+    inicializarModuloDinamico({
+        contenedorId: 'contenedor-tarjetas',
+        listaRutas: [
+            "sesiones/sesion-01.html",
+            "sesiones/sesion-02.html",
+            "sesiones/sesion-03.html",
+            "sesiones/sesion-04.html",
+            "sesiones/sesion-05.html",
+            "sesiones/sesion-06-07.html",
+            "sesiones/sesion-08.html"
+        ],
+        modalContentId: 'modalContent',
+        modalElementId: 'sesionModal',
+        tipo: 'sesion'
+    });
+
+    inicializarModuloDinamico({
+        contenedorId: 'contenedor-tarjetas-tintes',
+        listaRutas: [
+            "tintes/ficha-01.html"
+        ],
+        modalContentId: 'modalContentTintes',
+        modalElementId: 'fichaModal',
+        tipo: 'tinte'
+    });
 });
+
+function marcarPaginaActiva() {
+    const rutaActual = window.location.pathname;
+    
+    // Si estamos en la página de tintes
+    if (rutaActual.includes("tintes.html")) {
+        const linkTintes = document.getElementById("nav-tintes");
+        if (linkTintes) linkTintes.classList.add("active", "fw-bold");
+    } else {
+        // Por defecto estamos en el inicio
+        const linkInicio = document.getElementById("nav-inicio");
+        if (linkInicio) linkInicio.classList.add("active", "fw-bold");
+    }
+}
 
 function loadComponent(id, file) {
     const element = document.getElementById(id);
@@ -15,29 +53,25 @@ function loadComponent(id, file) {
                 if (!response.ok) throw new Error(`No se pudo cargar ${file}`);
                 return response.text();
             })
-            .then(data => { element.innerHTML = data; })
+            .then(data => { 
+                element.innerHTML = data; 
+                // Llamamos a marcar la página activa justo después de inyectar el navbar
+                if (id === "navbar-container") {
+                    marcarPaginaActiva();
+                }
+            })
             .catch(error => console.error(error));
     }
 }
 
-// Lista de archivos de sesión
-const listaSesiones = [
-    "sesiones/sesion-01.html",
-    "sesiones/sesion-02.html",
-    "sesiones/sesion-03.html",
-    "sesiones/sesion-04.html",
-    "sesiones/sesion-05.html",
-    "sesiones/sesion-06-07.html",
-    "sesiones/sesion-08.html"
-];
-
-function cargarIndiceSesiones() {
-    const contenedor = document.getElementById('contenedor-tarjetas');
-    if (!contenedor) return;
+// Función unificada y genérica para cualquier listado modular (Sesiones o Fichas)
+function inicializarModuloDinamico(config) {
+    const contenedor = document.getElementById(config.contenedorId);
+    if (!contenedor) return; // Si no existe el contenedor en esta página, no hace nada
 
     contenedor.innerHTML = '';
 
-    const promesas = listaSesiones.map(url => {
+    const promesas = config.listaRutas.map(url => {
         return fetch(url)
             .then(response => response.text())
             .then(html => {
@@ -48,8 +82,8 @@ function cargarIndiceSesiones() {
                 if (meta) {
                     const numAttr = meta.getAttribute('data-numero');
                     return {
-                        numStr: numAttr, // Texto exacto para mostrar (ej: "06 y 07" o "01")
-                        numSort: parseInt(numAttr), // Valor numérico para ordenar correctamente
+                        numStr: numAttr, 
+                        numSort: parseInt(numAttr), 
                         fecha: meta.getAttribute('data-fecha'),
                         titulo: meta.getAttribute('data-titulo'),
                         desc: meta.getAttribute('data-descripcion'),
@@ -59,63 +93,64 @@ function cargarIndiceSesiones() {
                 return null;
             })
             .catch(err => {
-                console.error("Error al cargar la sesión:", err);
+                console.error("Error al cargar el archivo:", err);
                 return null;
             });
     });
 
-    Promise.all(promesas).then(sesiones => {
-        const sesionesValidas = sesiones.filter(s => s !== null);
-        sesionesValidas.sort((a, b) => b.numSort - a.numSort); // Más nueva primero de forma descendente
+    Promise.all(promesas).then(elementos => {
+        const validos = elementos.filter(e => e !== null);
+        validos.sort((a, b) => b.numSort - a.numSort); // Más nuevo primero
 
-        sesionesValidas.forEach(s => {
+        validos.forEach(item => {
             const col = document.createElement('div');
             col.className = 'col-md-6 col-lg-4';
             
-            col.innerHTML = `
-                            <article class="session-card h-100 rounded-3 p-4 d-flex flex-column">
-                                <span class="session-number">${s.numStr}</span>
-                                <p class="text-muted mt-3 mb-2">${s.fecha}</p>
-                                <h3 class="h4">${s.titulo}</h3>
-                                <p class="text-muted small mb-4">${s.desc}</p>
-                                <div class="mt-auto">
-                                    <button class="btn btn-outline-secondary btn-leer w-100">
-                                        Leer sesión
-                                    </button>
-                                </div>
-                            </article>
-                        `;
+            const badgeTexto = config.tipo === 'sesion' ? item.numStr : `Ficha N° ${item.numStr}`;
+            const botonTexto = config.tipo === 'sesion' ? 'Leer sesión' : 'Ver ficha completa';
 
-            // Enlazar correctamente el evento click al botón de forma segura
-            const btn = col.querySelector('.btn-leer');
-            btn.addEventListener('click', () => cargarSesion(s.url));
+            col.innerHTML = `
+                <article class="session-card h-100 rounded-3 p-4 d-flex flex-column">
+                    <span class="session-number">${badgeTexto}</span>
+                    <p class="text-muted mt-3 mb-2">${item.fecha}</p>
+                    <h3 class="h4">${item.titulo}</h3>
+                    <p class="text-muted small mb-4">${item.desc}</p>
+                    <div class="mt-auto">
+                        <button class="btn btn-outline-secondary btn-leer w-100 btn-accion">
+                            ${botonTexto}
+                        </button>
+                    </div>
+                </article>
+            `;
+
+            const btn = col.querySelector('.btn-accion');
+            btn.addEventListener('click', () => abrirModalDinamico(item.url, config.modalContentId, config.modalElementId));
 
             contenedor.appendChild(col);
         });
     });
 }
 
-// Función global para abrir el modal cargando la sesión por fetch
-function cargarSesion(url) {
-    const modalContent = document.getElementById('modalContent');
-    const modalElement = document.getElementById('sesionModal');
+function abrirModalDinamico(url, modalContentId, modalElementId) {
+    const modalContent = document.getElementById(modalContentId);
+    const modalElement = document.getElementById(modalElementId);
     
     if (!modalContent || !modalElement) return;
 
     const myModal = new bootstrap.Modal(modalElement);
 
-    modalContent.innerHTML = '<div class="p-5 text-center text-muted">Cargando bitácora...</div>';
+    modalContent.innerHTML = '<div class="p-5 text-center text-muted">Cargando contenido...</div>';
     myModal.show();
     
     fetch(url)
         .then(response => {
-            if (!response.ok) throw new Error("No se pudo cargar la sesión");
+            if (!response.ok) throw new Error("No se pudo cargar el archivo");
             return response.text();
         })
         .then(html => {
             modalContent.innerHTML = html;
         })
         .catch(err => {
-            modalContent.innerHTML = '<div class="p-5 text-center text-danger">Error al cargar la sesión.</div>';
+            modalContent.innerHTML = '<div class="p-5 text-center text-danger">Error al cargar el contenido.</div>';
         });
 }

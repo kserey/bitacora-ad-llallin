@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fichas Tintoreras - Ad Llallin</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="bg-light">
+
+    <!-- Navbar dinámico -->
+    <div id="navbar-container"></div>
+
+    <!-- CABECERA DE LA SECCIÓN -->
+    <header class="page-header py-5 px-4 px-md-5 mt-5 pt-5 bg-white border-bottom">
+        <div class="container py-4">
+            <p class="eyebrow mb-1 text-uppercase text-secondary small fw-bold">Herbario Cromático</p>
+            <h1 class="h2 text-dark">Fichas Tintoreras</h1>
+            <p class="text-muted mb-0">
+                Registro sistemático de especies tintóreas, recolección, procesos de cocción y resultados experimentales desarrollados en la Escuela de Arte Textil Mapuche <em>Ad Llallin</em>.
+            </p>
+        </div>
+    </header>
+
+    <!-- CONTENEDOR DINÁMICO DE TARJETAS DE TINTES -->
+    <main class="container my-5">
+        <div id="contenedor-tarjetas-tintes" class="row g-4">
+            <!-- Las fichas se cargarán automáticamente aquí mediante JavaScript -->
+        </div>
+    </main>
+
+    <!-- MODAL GENERAL PARA VER LAS FICHAS -->
+    <div class="modal fade" id="fichaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content" id="modalContentTintes"></div>
+          <!-- El contenido se carga por fetch -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer dinámico -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script principal de tintes -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
