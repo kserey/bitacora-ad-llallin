@@ -23,7 +23,9 @@ document.addEventListener("DOMContentLoaded", function() {
     inicializarModuloDinamico({
         contenedorId: 'contenedor-tarjetas-tintes',
         listaRutas: [
-            "tintes/ficha-01.html"
+            "tintes/ficha-01.html",
+            "tintes/ficha-02.html",
+            "tintes/ficha-03.html"
         ],
         modalContentId: 'modalContentTintes',
         modalElementId: 'fichaModal',
