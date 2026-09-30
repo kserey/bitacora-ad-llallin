@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
             "sesiones/sesion-05.html",
             "sesiones/sesion-06-07.html",
             "sesiones/sesion-08.html",
+            "sesiones/sesion-10.html",
             "sesiones/sesion-11.html",
             "sesiones/sesion-12-13.html"
         ],
